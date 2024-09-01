@@ -1,0 +1,63 @@
+<section class="bg-gray-50 ">
+  <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+    <a routerLink="/home" class="flex items-center mb-6 text-2xl font-semibold text-gray-900 ">
+      <img class="w-8 h-8 mr-2" src="https://www.svgrepo.com/show/54410/blog.svg" alt="logo">
+      Angular 👍🏽
+    </a>
+    <div class="w-full bg-white rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0 ">
+      <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+        <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
+          Sign in to your account
+        </h1>
+        <form class="space-y-4 md:space-y-6" [formGroup]="loginForm" (submit)="submit()">
+          <div>
+            <label for="email" class="block mb-2 text-sm font-medium text-gray-900 ">Your email</label>
+            <input type="email" name="email" id="email" formControlName="email"
+                   class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                   [class.border-red-700]="loginForm.get('email')?.invalid && loginForm.get('email')?.touched"
+                   placeholder="name@company.com" required="">
+          </div>
+          @if (loginForm.get('email')?.invalid && loginForm.get('email')?.touched) {
+            <p class="mt-2 text-sm text-red-600 dark:text-red-500">Email field is Required!</p>
+          }
+          <div>
+            <label for="password" class="block mb-2 text-sm font-medium text-gray-900">Password</label>
+            <input type="password" name="password" id="password" placeholder="••••••••" formControlName="password"
+                   class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
+                   [class.border-red-700]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
+                   required="">
+          </div>
+          @if (loginForm.get('password')?.invalid && loginForm.get('password')?.touched) {
+            <p class="mt-2 text-sm text-red-600 dark:text-red-500">Password is Required!</p>
+          }
+
+          <div>
+            <label for="role" class="block mb-2 text-sm font-medium text-gray-900">Role</label>
+            <select id="role" formControlName="role"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                    [class.border-red-700]="loginForm.get('role')?.invalid && loginForm.get('role')?.touched"
+                    required>
+              <option value="" selected disabled>Select a role</option>
+              @for (role of roles; track role) {
+                <option [value]="role">{{ role }}</option>
+              }
+            </select>
+          </div>
+          @if (loginForm.get('role')?.invalid && loginForm.get('role')?.touched) {
+            <p class="mt-2 text-sm text-red-600 dark:text-red-500">Role selection is Required!</p>
+          }
+
+          <button type="submit" [disabled]="loginForm.invalid"
+                  class="w-full text-white bg-gray-900 hover:bg-gray-950 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+            Sign in
+          </button>
+          <p class="text-sm font-light text-gray-500">
+            Don’t have an account yet? <a routerLink="/register"
+                                          class="font-medium text-primary-600 hover:underline">Sign
+            up</a>
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
